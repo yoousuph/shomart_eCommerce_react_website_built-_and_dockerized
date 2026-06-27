@@ -1,388 +1,211 @@
-# React E-Commerce Project — Beginner to Full App
+# ShopMart React Build and Dockerization
 
-This repository contains the complete **React e-commerce application** built throughout the course.
-The project is designed to take you from **zero React knowledge** to building a **real, production-style application** using modern React patterns.
+This explains the dockerization of an e-commerce website built with React Javascript library.
 
----
-
-## 🤖 CodeRabbit Integration (Required)
-
-This project uses **CodeRabbit** to automatically review pull requests and catch bugs, best-practice issues, and improvements.
-
-### How to Integrate CodeRabbit
-
-1. Go to **[https://coderabbit.link/pedro](https://coderabbit.link/pedro)**
-2. Install CodeRabbit on your GitHub account
-3. Enable it for this repository
-4. Open a Pull Request
-5. CodeRabbit will automatically:
-   - Review your code
-   - Leave inline comments
-   - Highlight bugs, anti-patterns, and improvements
-
-> Code reviews are an essential part of real-world development.
-> CodeRabbit simulates having a senior developer reviewing your work.
 
 ---
 
-## 📚 Topics Covered (With Code)
+# ShopMart Dockerized React Application
+
+## Overview
+
+ShopMart is a React application built with Vite and containerized using Docker. This project demonstrates how to:
+
+* Build Docker images
+* Run containers
+* Use Docker volumes for development
+* Expose ports
+* Push images to Docker Hub
+* Containerize a frontend application using React and Vite
 
 ---
 
-## 1. Project Setup & Tooling
+## Tech Stack
 
-We initialize the project using **Vite**, which provides a fast development environment.
+* React
+* Vite
+* Docker
+* Docker Hub
+* Node js
+
+---
+
+## Prerequisites
+
+Before running this project, ensure you have installed:
+
+* Docker Desktop
+* Git
+* Node.js (optional for local development)
+
+---
+
+## Start with crating Vite
 
 ```bash
-npm create vite@latest
-npm install
-npm run dev
+npx create-vite@latest
 ```
 
-We clean up boilerplate files to start with a minimal structure.
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
 
 ---
 
-## 2. React Fundamentals
-
-### Components & JSX
-
-Components are functions that return JSX.
-
-```jsx
-function Button() {
-  return <button>Click me</button>;
-}
-```
-
-JSX allows us to mix JavaScript and HTML-like syntax.
-
----
-
-## 3. Props & Component Communication
-
-Props allow components to receive data.
-
-```jsx
-function Product({ name }) {
-  return <h2>{name}</h2>;
-}
-```
-
-Used to make components reusable and dynamic.
-
----
-
-## 4. State Management with `useState`
-
-State allows components to store and update data.
-
-```jsx
-const [count, setCount] = useState(0);
-
-<button onClick={() => setCount(count + 1)}>+</button>;
-```
-
-We use state for:
-
-- Forms
-- Errors
-- UI updates
-- Cart logic
-
----
-
-## 5. Event Handling
-
-React uses camelCase event handlers.
-
-```jsx
-<input onChange={(e) => setEmail(e.target.value)} />
-```
-
-Used for:
-
-- Form inputs
-- Buttons
-- User interactions
-
----
-
-## 6. Conditional Rendering
-
-Render UI based on conditions.
-
-```jsx
-{
-  error && <p>{error}</p>;
-}
-```
-
-Used for:
-
-- Errors
-- Auth state
-- Cart indicators
-
----
-
-## 7. Authentication Logic (Frontend)
-
-We implement **signup and login logic** using in-memory data and localStorage.
-
-```js
-const user = users.find((u) => u.email === email && u.password === password);
-
-if (!user) {
-  return { success: false, error: "Invalid email or password" };
-}
-```
-
-We intentionally return **generic errors** for security reasons.
-
----
-
-## 8. Persisting Auth State
-
-We store logged-in users in `localStorage`.
-
-```js
-localStorage.setItem("user", JSON.stringify(user));
-```
-
-This allows session persistence on refresh.
-
----
-
-## 9. React Context API
-
-Context allows sharing global state.
-
-```jsx
-export const AuthContext = createContext();
-
-<AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
-```
-
-Used for:
-
-- Authentication
-- Cart state
-
----
-
-## 10. Custom Hooks
-
-Custom hooks abstract reusable logic.
-
-```js
-export function useAuth() {
-  return useContext(AuthContext);
-}
-```
-
-This removes repetitive imports and improves readability.
-
----
-
-## 11. Routing with React Router
-
-We define application routes.
-
-```jsx
-<Route path="/" element={<Home />} />
-<Route path="/login" element={<Login />} />
-```
-
-Used for page navigation.
-
----
-
-## 12. Programmatic Navigation
-
-We redirect users using `useNavigate`.
-
-```js
-const navigate = useNavigate();
-navigate("/");
-```
-
-Used after login and error handling.
-
----
-
-## 13. Dynamic Routes & URL Params
-
-Dynamic routes allow variable URLs.
-
-```jsx
-<Route path="/products/:id" element={<ProductDetails />} />
-```
-
-Access params using:
-
-```js
-const { id } = useParams();
-```
-
----
-
-## 14. Side Effects with `useEffect`
-
-Run logic when components render.
-
-```js
-useEffect(() => {
-  fetchProduct();
-}, [id]);
-```
-
-Used for:
-
-- Fetching data
-- Syncing UI with params
-
----
-
-## 15. Handling Loading & Null States
-
-Prevent crashes when data is unavailable.
-
-```jsx
-if (!product) return <h1>Loading...</h1>;
-```
-
-Essential for real-world apps.
-
----
-
-## 16. Product System
-
-We render products dynamically.
-
-```jsx
-products.map((product) => <ProductCard key={product.id} product={product} />);
-```
-
-Each product has:
-
-- ID
-- Name
-- Price
-- Image
-- Description
-
----
-
-## 17. Cart Context (Global State)
-
-Cart items stored as:
-
-```js
-{ id: 2, quantity: 3 }
-```
-
-Cart state lives in Context so it’s accessible everywhere.
-
----
-
-## 18. Adding Items to Cart
-
-Prevent duplicate entries.
-
-```js
-if (existingItem) {
-  quantity += 1;
-} else {
-  add new item
-}
-```
-
-State updates are immutable.
-
----
-
-## 19. Updating Cart Quantities
-
-We update items using `map`.
-
-```js
-cartItems.map((item) =>
-  item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
-);
-```
-
----
-
-## 20. Removing Items from Cart
-
-Remove items using `filter`.
-
-```js
-cartItems.filter((item) => item.id !== id);
-```
-
----
-
-## 21. Checkout Page
-
-Displays:
-
-- Cart items
-- Quantity controls
-- Total price
-
-```js
-const total = cartItems.reduce((sum, item) => {
-  return sum + item.price * item.quantity;
-}, 0);
-```
-
----
-
-## 22. Placing an Order (Mock)
-
-Simulates checkout.
-
-```js
-alert("Order placed!");
-clearCart();
-```
-
-Used to demonstrate full flow.
-
----
-
-## 23. Accessibility & Best Practices
-
-- Keys in lists
-- Avoiding span buttons
-- Cleaning console logs
-- Handling edge cases
-
----
-
-## 24. Deployment with Vercel
-
-Deploy the app publicly.
+## Edit to your custom folders for the App
 
 ```text
-Vercel → Import GitHub Repo → Deploy
+1. Customize App.jsx file based on preferences
+2. Create new components based on bussiness requirements
+3. See project structure in the next section as 
 ```
 
-Works for any React app, not just Next.js.
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
 
 ---
 
-## 🎯 Learning Outcome
+## initiate Vite hot reload to see app build process on the web browser
 
-After finishing this project, you can:
+```bash
+npm run dev
+```
+App should start running on port 5173 
 
-- Build React apps from scratch
-- Manage complex UI state
-- Use Context & custom hooks
-- Implement routing and auth flows
-- Build real-world features
-- Deploy production apps
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+---
+
+## Project Structure
+
+```text
+shopmart-ecommerce-website/
+├── public/
+├── src/
+|     ├── assets
+|     ├── components
+|     ├── data
+|     ├── pages
+|      App.css
+|      App.jsx
+|      index.css
+|      main.jsx
+├── .dockerignore
+├── .gitignore
+├── Dockerfile
+├── eslint.cnfig.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── vite.config.js
+```
 
 ---
+
+## Build docker image (build process looks out for a Dockerfile)
+
+```bash
+docker build -t shopmart:0.1 .
+```
+
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+
+---
+
+## Check docker images 
+
+```bash
+docker images
+```
+you an also check and confirm on Docker Desktop App
+
+---
+
+## Run the Container
+
+```bash
+docker run \
+-p 3000:5173 \  # 3000 for host, 5173 for the app
+-v C:\Users\Administrator\Documents\Projects\Web_dev\shopmart-ecommerce-website:/App \  # Volume for updating app in the container as changes is made to the app on your local machine.
+-v /App/node_modules \  # Volume for node_modules in case of accidental delete in the system file.
+--name shopmart_c_0.1 \  # container name
+shopmart:0.1  # image name with which container runs
+```
+---
+
+## Confirm app is running on the browser
+
+Open:
+
+```text
+http://localhost:3000
+```
+
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+
+---
+
+### View Containers
+
+```bash
+docker ps
+```
+
+### View Logs
+
+```bash
+docker logs shopmart_c_0.1
+```
+
+### Stop Container
+
+```bash
+docker stop shopmart_c_0.1
+```
+
+### Remove Container
+
+```bash
+docker rm -f shopmart_c_0.1
+```
+
+---
+
+## Docker Hub Repository
+
+Docker Image:
+
+```text
+yoousuph/shopmart_app:0.1
+```
+
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+
+---
+
+## Creating an image to be pushed to Docker Hub Repository
+
+```bash
+docker build -t yoousuph/shopmart_app:0.1
+```
+![Project Screenshot 1.JPG](C:\Users\REALITY\Documents\Projects\Cloud\aws_3tier_architecture\imgs\1.JPG)
+
+---
+
+## Lessons Learned
+
+* Creating Docker images using Dockerfile
+* Running and managing containers
+* Working with Docker volumes
+* Debugging container networking issues
+* Using Vite inside Docker
+* Publishing images to Docker Hub
+
+---
+
+## Author
+
+**Yusuf Kehinde**
+
+IT Infrastructure Engineer | Cloud Engineer | DevOps Enthusiast
