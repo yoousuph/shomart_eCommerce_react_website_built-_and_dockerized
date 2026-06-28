@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  api:
+  sopmart_v0.1:
     build: .
-    container_name: shopmart-c_0.1
+    container_name: shopmart_c_0.1
     ports:
       - "3000:5173"
     volumes:
