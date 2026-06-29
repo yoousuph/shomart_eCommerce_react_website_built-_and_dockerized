@@ -76,9 +76,9 @@ Preferably comment out the default vite defineConfig in vite.cobfig.js file wher
 
 ![git_actions3.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/git_actions3.jpg)
 
-![git_actions4.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/git_actions4.jpg)
+![git_actions4.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/main/imgs/git_actions3.jpg)
 
-![git_actions5.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/git_actions5.jpg)
+![git_actions5.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/main/imgs/git_actions5.jpg)
 
 ---
 
