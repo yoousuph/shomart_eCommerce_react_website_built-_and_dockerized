@@ -76,6 +76,10 @@ Preferably comment out the default vite defineConfig in vite.cobfig.js file wher
 
 ![git_actions3.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/git_actions3.jpg)
 
+![git_actions4.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/git_actions4.jpg)
+
+![git_actions5.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/git_actions5.jpg)
+
 ---
 
 ## initiate Vite hot reload to see app build process on the web browser
@@ -190,6 +194,13 @@ docker stop shopmart_c_0.1
 ```bash
 docker rm -f shopmart_c_0.1
 ```
+---
+
+## Using a docker-compose.yaml file
+
+![docker-compose.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/docker-compose.jpg)
+
+![composed-container-running.jpg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/development/imgs/composed-container-running.jpg)
 
 ---
 
@@ -227,8 +238,8 @@ docker build -t yoousuph/shopmart_app:0.1
 * Working with Docker volumes
 * Debugging container networking issues
 * Using Vite inside Docker
-* Publishing images to Docker Hub
 * Git Actions
+* Publishing images to Docker Hub
 
 ---
 
