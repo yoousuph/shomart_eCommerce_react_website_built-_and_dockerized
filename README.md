@@ -4,6 +4,10 @@ This project explains the dockerization of an E-Commerce website built with Reac
 
 ---
 
+# Architecture Diagram
+
+![docker-architecture-diagram.jpeg](https://github.com/yoousuph/shomart_eCommerce_react_website_built-_and_dockerized/blob/main/imgs/docker-architecture-diagram.jpeg)
+
 # ShopMart Dockerized React Application
 
 ## Overview
